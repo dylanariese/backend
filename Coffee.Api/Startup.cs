@@ -15,6 +15,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Core;
+using Microsoft.EntityFrameworkCore;
+using Coffee.Data;
+using Coffee.Core.Users;
+using Coffee.Core;
 
 namespace Coffee.Api
 {
@@ -39,9 +43,17 @@ namespace Coffee.Api
             services.AddTransient<IAuthorizationHandler, AdminEntryHandler>();
             services.AddAuthorization(options => options.AddPolicy("AdminAuthorization", policy => policy.Requirements.Add(new AdminEntryRequirement())));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddControllersAsServices();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            var connectionString = Configuration.GetConnectionString("CoffeeContext");
+            services.AddDbContext<CoffeeContext>
+                (options => options.UseSqlServer(connection));
+
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
             services.AddCors();
+
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
