@@ -38,7 +38,7 @@ namespace Coffee.Core
 
             var newEvent = new Event
             {
-                StartDate = new DateTime().AddHours(1),
+                StartDate = DateTime.Now.AddHours(1),
                 UserId = user.UserId
             };
 

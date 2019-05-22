@@ -51,28 +51,8 @@ namespace Coffee.Api
         {
             var newEvent = await eventService.PostEvent(coffeeEvent);
 
-            return CreatedAtAction("GetEvent", new { id = newEvent.EventId }, newEvent);
+            return CreatedAtAction("GetEvent", new { id = newEvent.EventId }, coffeeEvent);
         }
 
-        //// DELETE: api/Events/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Event>> DeleteEvent(int id)
-        //{
-        //    var @event = await _context.Event.FindAsync(id);
-        //    if (@event == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Event.Remove(@event);
-        //    await _context.SaveChangesAsync();
-
-        //    return @event;
-        //}
-
-        //private bool EventExists(int id)
-        //{
-        //    return _context.Event.Any(e => e.EventId == id);
-        //}
     }
 }

@@ -42,6 +42,7 @@ namespace Coffee.Core
 
             return user;
         }
+
     }
 }
 

@@ -66,6 +66,5 @@ namespace Coffee.Api.Controllers
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
-
     }
 }
