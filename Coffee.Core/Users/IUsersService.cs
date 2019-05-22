@@ -11,6 +11,7 @@ namespace Coffee.Core.Users
     {
         Task<List<User>> GetUsers();
         Task<User> GetUser(int id);
+        Task<User> GetUserByDeviceId(string id);
         Task<User> PostUser(User user);
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coffee.Data.Migrations
 {
     [DbContext(typeof(CoffeeContext))]
-    [Migration("20190521133411_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190522124058_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,10 +26,6 @@ namespace Coffee.Data.Migrations
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Organizor");
 
                     b.Property<DateTime>("StartDate");
 
@@ -57,7 +53,7 @@ namespace Coffee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeviceId");
+                    b.Property<string>("DeviceId");
 
                     b.Property<string>("Name");
 

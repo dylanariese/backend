@@ -45,15 +45,16 @@ namespace Coffee.Api
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddControllersAsServices();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
             var connectionString = Configuration.GetConnectionString("CoffeeContext");
             services.AddDbContext<CoffeeContext>
-                (options => options.UseSqlServer(connection));
+                (options => options.UseSqlServer(connectionString));
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger));
             services.AddCors();
 
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IEventsService, EventsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

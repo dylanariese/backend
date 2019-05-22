@@ -24,6 +24,11 @@ namespace Coffee.Core
             return await _context.User.FindAsync(id);
         }
 
+        public async Task<User> GetUserByDeviceId(string deviceId)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.DeviceId == deviceId);
+        }
+
         public async Task<List<User>> GetUsers()
         {
             return  await _context.User.ToListAsync();

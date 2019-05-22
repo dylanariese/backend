@@ -44,6 +44,20 @@ namespace Coffee.Api.Controllers
             return user;
         }
 
+        // GET: api/Users/byDeviceId/123123-123123-BSSAD
+        [HttpGet("byDeviceId/{deviceId}")]
+        public async Task<ActionResult<User>> GetUser(string deviceId)
+        {
+            var user = await usersService.GetUserByDeviceId(deviceId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
         // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)

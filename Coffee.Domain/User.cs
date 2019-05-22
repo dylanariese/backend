@@ -8,6 +8,6 @@ namespace Coffee.Domain
     {
         public int UserId { get; set; }
         public string Name { get; set; }
-        public int DeviceId { get; set; }
+        public string DeviceId { get; set; }        
     }
 }

@@ -25,15 +25,13 @@ namespace Coffee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("OrganizorUserId");
-
                     b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("OrganizorUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Event");
                 });
@@ -57,7 +55,7 @@ namespace Coffee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeviceId");
+                    b.Property<string>("DeviceId");
 
                     b.Property<string>("Name");
 
@@ -68,9 +66,10 @@ namespace Coffee.Data.Migrations
 
             modelBuilder.Entity("Coffee.Domain.Event", b =>
                 {
-                    b.HasOne("Coffee.Domain.User", "Organizor")
+                    b.HasOne("Coffee.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("OrganizorUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Coffee.Domain.EventUser", b =>

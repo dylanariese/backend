@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coffee.Data.Migrations
 {
     [DbContext(typeof(CoffeeContext))]
-    [Migration("20190521134126_aangepaste_organizer")]
-    partial class aangepaste_organizer
+    [Migration("20190522124404_event_owner")]
+    partial class event_owner
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,15 +27,13 @@ namespace Coffee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("OrganizorUserId");
-
                     b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("UserId");
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("OrganizorUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Event");
                 });
@@ -59,7 +57,7 @@ namespace Coffee.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeviceId");
+                    b.Property<string>("DeviceId");
 
                     b.Property<string>("Name");
 
@@ -70,9 +68,10 @@ namespace Coffee.Data.Migrations
 
             modelBuilder.Entity("Coffee.Domain.Event", b =>
                 {
-                    b.HasOne("Coffee.Domain.User", "Organizor")
+                    b.HasOne("Coffee.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("OrganizorUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Coffee.Domain.EventUser", b =>
